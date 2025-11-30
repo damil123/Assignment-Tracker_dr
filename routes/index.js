@@ -1,31 +1,28 @@
-// Main routes file - handles all page routes and CRUD operations
+// Main routes file for the Assignment Tracker
+// Handles all pages + CRUD actions for assignments
+
 const express = require('express');
 const router = express.Router();
 const Assignment = require('../models/Assignment');
 
-// Middleware - Check if user is authenticated
+// Basic middleware to check if a user is logged in
 function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    // Redirect to home if not logged in
-    res.redirect('/');
+    if (req.isAuthenticated()) return next();
+    res.redirect('/'); // send them back to home if not logged in
 }
 
-// ============= HOME PAGE =============
-// GET / - Home page (splash page)
+/* ---------------- HOME PAGE ---------------- */
+// GET / — main landing page
 router.get('/', (req, res) => {
     res.render('home');
 });
 
-// ============= READ - VIEW ALL ASSIGNMENTS =============
-// GET /assignments - Assignment list page (public - anyone can view)
+/* ---------------- READ: VIEW ALL ASSIGNMENTS ---------------- */
+// GET /assignments — anyone can view the list
 router.get('/assignments', async (req, res) => {
     try {
-        // Get all assignments from database, sorted by due date (earliest first)
+        // load all assignments sorted by due date (earlier first)
         const assignments = await Assignment.find().sort({ dueDate: 1 });
-        
-        // Render list page with assignments
         res.render('list', { assignments });
     } catch (error) {
         console.error('Error fetching assignments:', error);
@@ -33,16 +30,16 @@ router.get('/assignments', async (req, res) => {
     }
 });
 
-// ============= CREATE - ADD NEW ASSIGNMENT =============
-// GET /assignments/add - Show add assignment form (protected - must be logged in)
+/* ---------------- CREATE: ADD ASSIGNMENT ---------------- */
+// GET /assignments/add — show form (login required)
 router.get('/assignments/add', isAuthenticated, (req, res) => {
     res.render('add');
 });
 
-// POST /assignments/add - Create new assignment (protected)
+// POST /assignments/add — save new assignment to DB
 router.post('/assignments/add', isAuthenticated, async (req, res) => {
     try {
-        // Create new assignment object with form data
+        // create assignment using form data
         const newAssignment = new Assignment({
             courseName: req.body.courseName,
             title: req.body.title,
@@ -50,33 +47,27 @@ router.post('/assignments/add', isAuthenticated, async (req, res) => {
             status: req.body.status,
             priority: req.body.priority,
             description: req.body.description,
-            createdBy: req.user.name // Track who created it
+            createdBy: req.user.name // track who created it
         });
 
-        // Save to database
-        await newAssignment.save();
-        
-        // Redirect to assignment list
-        res.redirect('/assignments');
+        await newAssignment.save(); // save in database
+        res.redirect('/assignments'); // go back to list
     } catch (error) {
         console.error('Error creating assignment:', error);
         res.status(500).send('Error creating assignment');
     }
 });
 
-// ============= UPDATE - EDIT ASSIGNMENT =============
-// GET /assignments/edit/:id - Show edit form (protected)
+/* ---------------- UPDATE: EDIT ASSIGNMENT ---------------- */
+// GET /assignments/edit/:id — show edit form
 router.get('/assignments/edit/:id', isAuthenticated, async (req, res) => {
     try {
-        // Find assignment by ID
         const assignment = await Assignment.findById(req.params.id);
-        
-        // Check if assignment exists
+
         if (!assignment) {
             return res.status(404).send('Assignment not found');
         }
-        
-        // Render edit page with assignment data
+
         res.render('edit', { assignment });
     } catch (error) {
         console.error('Error loading assignment:', error);
@@ -84,10 +75,9 @@ router.get('/assignments/edit/:id', isAuthenticated, async (req, res) => {
     }
 });
 
-// POST /assignments/edit/:id - Update assignment (protected)
+// POST /assignments/edit/:id — update in DB
 router.post('/assignments/edit/:id', isAuthenticated, async (req, res) => {
     try {
-        // Update assignment with new data from form
         await Assignment.findByIdAndUpdate(req.params.id, {
             courseName: req.body.courseName,
             title: req.body.title,
@@ -97,7 +87,6 @@ router.post('/assignments/edit/:id', isAuthenticated, async (req, res) => {
             description: req.body.description
         });
 
-        // Redirect back to assignment list
         res.redirect('/assignments');
     } catch (error) {
         console.error('Error updating assignment:', error);
@@ -105,14 +94,11 @@ router.post('/assignments/edit/:id', isAuthenticated, async (req, res) => {
     }
 });
 
-// ============= DELETE - REMOVE ASSIGNMENT =============
-// POST /assignments/delete/:id - Delete assignment (protected)
+/* ---------------- DELETE: REMOVE ASSIGNMENT ---------------- */
+// POST /assignments/delete/:id — delete from DB
 router.post('/assignments/delete/:id', isAuthenticated, async (req, res) => {
     try {
-        // Delete assignment from database
         await Assignment.findByIdAndDelete(req.params.id);
-        
-        // Redirect back to assignment list
         res.redirect('/assignments');
     } catch (error) {
         console.error('Error deleting assignment:', error);
@@ -120,5 +106,5 @@ router.post('/assignments/delete/:id', isAuthenticated, async (req, res) => {
     }
 });
 
-// Export router so app.js can use it
+// export routes to be used in app.js
 module.exports = router;

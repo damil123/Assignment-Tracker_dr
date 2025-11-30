@@ -1,37 +1,35 @@
-<!-- views/partials/footer.ejs -->
-<!-- Shared footer - appears on every page -->
-
-<!-- Footer section -->
+<!-- Shared footer (included on every page) -->
 <footer class="bg-black text-light mt-5 py-4 border-top border-secondary">
     <div class="container text-center">
-        <!-- Copyright notice -->
+
+        <!-- copyright -->
         <p class="mb-1">
             &copy; <%= new Date().getFullYear() %> Assignment Tracker
         </p>
-        
-        <!-- credit -->
+
+        <!-- personal credit -->
         <p class="mb-2">
             <small class="text-warning">
-                <i class="bi bi-code-slash"></i> 
+                <i class="bi bi-code-slash"></i>
                 Developed by <strong>Damil Randhawa</strong>
             </small>
         </p>
-        
-        <!-- Tech stack info -->
+
+        <!-- small note about what the project uses -->
         <p class="mb-0">
             <small class="text-muted">
-                Built with Express.js, MongoDB & Bootstrap | 
-                <i class="bi bi-shield-lock text-success"></i> 
-                Secured with Google & GitHub OAuth
+                Built with Express, MongoDB & Bootstrap |
+                <i class="bi bi-shield-lock text-success"></i>
+                Google & GitHub OAuth
             </small>
         </p>
     </div>
 </footer>
 
-<!-- Bootstrap JavaScript -->
+<!-- Bootstrap JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Custom JavaScript -->
+<!-- custom JS file -->
 <script src="/js/script.js"></script>
 
 </body>

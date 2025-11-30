@@ -1,107 +1,48 @@
-<%- include('partials/header', { title: 'Home - Assignment Tracker' }) %>
+<%- include("partials/header", { title: "Home" }) %>
 
-<!-- Hero section - big welcome banner -->
-<div class="hero-section bg-primary text-white text-center py-5 mb-5">
-    <div class="container">
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-50">
+      <div class="col-md-8 text-center">
+
         <!-- Main heading -->
-        <h1 class="display-3 fw-bold mb-4">
-            <i class="bi bi-journal-check"></i> Assignment Tracker
+        <h1 class="display-4 fw-bold mb-3">
+          <i class="bi bi-journal-check me-2"></i>Assignment Tracker
         </h1>
-        
+
         <!-- Subheading -->
-        <p class="lead mb-4">
-            Keep track of all your assignments in one place. Never miss a deadline again!
+        <p class="lead text-secondary mb-4">
+          A simple place to keep track of your school assignments.  
+          Login once, and your work stays organized.
         </p>
-        
-        <!-- Check if user is logged in -->
+
+        <!--  login to assignments -->
         <% if (!user) { %>
-            <!-- Show login buttons if not logged in -->
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="/auth/google" class="btn btn-light btn-lg">
-                    <i class="bi bi-google"></i> Login with Google
-                </a>
-                <a href="/auth/github" class="btn btn-outline-light btn-lg">
-                    <i class="bi bi-github"></i> Login with GitHub
-                </a>
-            </div>
-        <% } else { %>
-            <!-- Show browse button if logged in -->
-            <a href="/assignments" class="btn btn-light btn-lg">
-                <i class="bi bi-arrow-right-circle"></i> View My Assignments
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="/auth/google" class="btn btn-primary btn-lg">
+              <i class="bi bi-google me-1"></i> Login with Google
             </a>
+
+            <a href="/auth/github" class="btn btn-outline-light btn-lg">
+              <i class="bi bi-github me-1"></i> Login with GitHub
+            </a>
+          </div>
+        <% } else { %>
+          <a href="/assignments" class="btn btn-success btn-lg">
+            <i class="bi bi-arrow-right-circle me-1"></i> Go to My Assignments
+          </a>
         <% } %>
-    </div>
-</div>
 
-<!-- Features section - 3 cards showing what the app does -->
-<div class="container my-5">
-    <div class="row g-4">
-        <!-- Feature 1: View Assignments -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <i class="bi bi-eye-fill text-primary" style="font-size: 3rem;"></i>
-                    <h3 class="card-title mt-3">View Assignments</h3>
-                    <p class="card-text">
-                        See all your assignments in one organized list. 
-                        Sort by due date and track your progress.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Feature 2: Add & Manage -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <i class="bi bi-pencil-square text-success" style="font-size: 3rem;"></i>
-                    <h3 class="card-title mt-3">Add & Manage</h3>
-                    <p class="card-text">
-                        Add and update new assignments . 
-                        Mark them as complete when you're done.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Feature 3: Secure Login -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <i class="bi bi-shield-lock-fill text-warning" style="font-size: 3rem;"></i>
-                    <h3 class="card-title mt-3">Secure Login</h3>
-                    <p class="card-text">
-                        Your data is safe with Google or GitHub authentication. 
-                        No need to remember a password again
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Call to action section -->
-<div class="bg-light py-5 text-center">
-    <div class="container">
-        <h2 class="mb-4">Ready to Get Organized?</h2>
-        <p class="lead mb-4">
-            Start tracking your assignments today and stay on top of your coursework.
+        <!-- Tiny helper text -->
+        <p class="text-secondary small mt-3">
+          You’ll be redirected to your assignments after logging in.
         </p>
-        
-        <!-- Different button based on login status -->
-        <% if (!user) { %>
-            <a href="/auth/google" class="btn btn-primary btn-lg me-2">
-                <i class="bi bi-google"></i> Get Started with Google
-            </a>
-            <a href="/auth/github" class="btn btn-outline-primary btn-lg">
-                <i class="bi bi-github"></i> Get Started with GitHub
-            </a>
-        <% } else { %>
-            <a href="/assignments/add" class="btn btn-primary btn-lg">
-                <i class="bi bi-plus-circle"></i> Add Your First Assignment
-            </a>
-        <% } %>
-    </div>
-</div>
 
-<%- include('partials/footer') %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include("partials/footer") %>
+
+

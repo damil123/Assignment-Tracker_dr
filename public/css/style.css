@@ -1,70 +1,75 @@
-* Overall body styling */
+/* Basic page layout and dark theme */
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #000;   /* black background */
+    color: #f8f9fa;           /* light text for contrast */
 }
 
-/* Make main content grow to push footer down */
+/* lets main area grow so footer stays at the bottom */
 main {
     flex: 1;
 }
 
-/* Hero section styling - big colored banner */
-.hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 80px 0;
-}
-
-/* Navbar brand (logo) styling */
+/* navbar brand text slightly bigger */
 .navbar-brand {
-    font-weight: bold;
-    font-size: 1.3rem;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
-/* Card hover effect - lift up slightly */
-.card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* remove underlines from links unless hovering */
+a {
+    text-decoration: none;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+a:hover {
+    text-decoration: underline;
 }
 
-/* Button styling - smooth transitions */
-.btn {
-    transition: all 0.3s ease;
+/* small spacing between sections */
+section {
+    margin-bottom: 1rem;
 }
 
-/* Form control focus effect - blue glow */
+/* dark theme form inputs */
+.form-control,
+.form-select,
+textarea {
+    background-color: #111;
+    color: #f8f9fa;
+    border: 1px solid #444;
+}
+
+/* remove bright bootstrap glow on focus */
 .form-control:focus,
-.form-select:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+.form-select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #888;
+    box-shadow: none;
 }
 
-/* Badge styling - rounded corners */
-.badge {
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-weight: 500;
+/* smoother button hover animations */
+.btn {
+    transition: background-color 0.15s ease,
+                border-color 0.15s ease,
+                color 0.15s ease;
 }
 
-/* Footer stays at bottom */
+/* dark box used for add/edit forms */
+.bg-black {
+    background-color: #000 !important;
+}
+
+/* slightly smaller table text so it fits better */
+table {
+    font-size: 0.9rem;
+}
+
+/* footer styling */
 footer {
     margin-top: auto;
-}
-
-/* Responsive font sizes for smaller screens */
-@media (max-width: 768px) {
-    .hero-section h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-section .lead {
-        font-size: 1rem;
-    }
+    font-size: 0.85rem;
 }
