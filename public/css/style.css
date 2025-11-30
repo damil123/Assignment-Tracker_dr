@@ -1,0 +1,72 @@
+/* Custom CSS styles for Assignment Tracker */
+
+/* Overall body styling */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Make main content grow to push footer down */
+main {
+    flex: 1;
+}
+
+/* Hero section styling - big colored banner */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
+}
+
+/* Navbar brand (logo) styling */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* Card hover effect - lift up slightly */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling - smooth transitions */
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Form control focus effect - blue glow */
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Badge styling - rounded corners */
+.badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Footer stays at bottom */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive font sizes for smaller screens */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+}
