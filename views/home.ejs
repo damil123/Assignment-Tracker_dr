@@ -1,3 +1,4 @@
+<!-- include header and set page title -->
 <%- include("partials/header", { title: "Home" }) %>
 
 <section class="py-5">
@@ -5,35 +6,41 @@
     <div class="row justify-content-center align-items-center min-vh-50">
       <div class="col-md-8 text-center">
 
-        <!-- Main heading -->
+        <!-- main heading -->
         <h1 class="display-4 fw-bold mb-3">
           <i class="bi bi-journal-check me-2"></i>Assignment Tracker
         </h1>
 
-        <!-- Subheading -->
+        <!-- small description -->
         <p class="lead text-secondary mb-4">
           A simple place to keep track of your school assignments.  
           Login once, and your work stays organized.
         </p>
 
-        <!--  login to assignments -->
+        <!-- show login buttons if user is not logged in -->
         <% if (!user) { %>
           <div class="d-flex flex-wrap justify-content-center gap-3">
+
+            <!-- google login -->
             <a href="/auth/google" class="btn btn-primary btn-lg">
               <i class="bi bi-google me-1"></i> Login with Google
             </a>
 
+            <!-- github login -->
             <a href="/auth/github" class="btn btn-outline-light btn-lg">
               <i class="bi bi-github me-1"></i> Login with GitHub
             </a>
+
           </div>
+
+        <!-- if logged in, show link to assignments -->
         <% } else { %>
           <a href="/assignments" class="btn btn-success btn-lg">
             <i class="bi bi-arrow-right-circle me-1"></i> Go to My Assignments
           </a>
         <% } %>
 
-        <!-- Tiny helper text -->
+        <!-- small helper note -->
         <p class="text-secondary small mt-3">
           You’ll be redirected to your assignments after logging in.
         </p>
@@ -43,6 +50,5 @@
   </div>
 </section>
 
+<!-- include footer -->
 <%- include("partials/footer") %>
-
-

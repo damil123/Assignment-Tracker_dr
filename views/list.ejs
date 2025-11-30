@@ -1,14 +1,16 @@
+<!-- include shared header and set page title -->
 <%- include("partials/header", { title: "All Assignments" }) %>
 
 <section class="py-4">
   <div class="container">
 
-    <!-- Heading + Add button -->
+    <!-- page title + add button when logged in -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="mb-0">
         <i class="bi bi-list-task me-2"></i>All Assignments
       </h1>
 
+      <!-- only logged-in users can add assignments -->
       <% if (user) { %>
         <a href="/assignments/add" class="btn btn-primary">
           <i class="bi bi-plus-circle me-1"></i>Add Assignment
@@ -16,20 +18,22 @@
       <% } %>
     </div>
 
-    <!-- If no assignments -->
+    <!-- show message if no assignments -->
     <% if (!assignments || assignments.length === 0) { %>
       <div class="alert alert-info text-center" role="alert">
-        <i class="bi bi-info-circle me-1"></i>
-        No assignments yet.
+        <i class="bi bi-info-circle me-1"></i>No assignments yet.
+
+        <!-- different text based on login status -->
         <% if (user) { %>
           <a href="/assignments/add">Add your first assignment</a>.
         <% } else { %>
           Please log in to add assignments.
         <% } %>
       </div>
+
     <% } else { %>
 
-      <!-- table of assignments -->
+      <!-- main table of assignments -->
       <div class="table-responsive">
         <table class="table table-dark table-bordered align-middle">
           <thead>
@@ -42,25 +46,13 @@
               <th style="width: 160px;">Actions</th>
             </tr>
           </thead>
+
           <tbody>
+            <!-- loop through each assignment -->
             <% assignments.forEach(assignment => { %>
               <tr>
                 <td><%= assignment.courseName %></td>
                 <td><%= assignment.title %></td>
-                <td>
-                  <%= new Date(assignment.dueDate).toLocaleDateString("en-CA") %>
-                </td>
-                <td>
-                  <% if (assignment.status === "Completed") { %>
-                    <span class="badge bg-success"><%= assignment.status %></span>
-                  <% } else if (assignment.status === "In Progress") { %>
-                    <span class="badge bg-warning text-dark"><%= assignment.status %></span>
-                  <% } else { %>
-                    <span class="badge bg-secondary"><%= assignment.status %></span>
-                  <% } %>
-                </td>
-                <td>
-                  <% if (assignment.priority === "High") { %>
-                    <span class="badge bg-danger"><%= assignment.priority %></span>
-                  <% } else if (assignment.priority === "Medium") { %>
-                    <span class="badge bg-warning text-dark"><%= assignment.pr
+
+                <!--
+
