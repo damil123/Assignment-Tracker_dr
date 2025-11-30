@@ -1,34 +1,32 @@
-html<!-- views/partials/header.ejs -->
-<!-- Shared header component - appears on every page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Page title - changes based on page -->
+    <!-- Page title -->
     <title><%= typeof title != 'undefined' ? title : 'Assignment Tracker' %></title>
     
-    <!-- Bootstrap CSS - for styling buttons, forms, cards, etc -->
+    <!-- Bootstrap CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Bootstrap Icons - for pretty icons -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
-    <!-- Custom CSS file -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="bg-dark text-light">
 
-<!-- Navigation Bar - sticky at top -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<!-- Top Navigation Bar - Dark theme -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
     <div class="container">
-        <!-- Logo/Brand -->
-        <a class="navbar-brand" href="/">
-            <i class="bi bi-journal-check"></i> Assignment Tracker
+        <!-- Logo/Brand name -->
+        <a class="navbar-brand fw-bold" href="/">
+            <i class="bi bi-journal-check text-warning"></i> Assignment Tracker
         </a>
         
-        <!-- Mobile menu button -->
+        <!-- Mobile menu toggle button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,28 +41,28 @@ html<!-- views/partials/header.ejs -->
                     </a>
                 </li>
                 
-                <!-- Assignments link -->
+                <!-- View assignments link -->
                 <li class="nav-item">
                     <a class="nav-link" href="/assignments">
-                        <i class="bi bi-list-task"></i> Assignments
+                        <i class="bi bi-list-task"></i> View Assignments
                     </a>
                 </li>
                 
                 <!-- Check if user is logged in -->
                 <% if (user) { %>
-                    <!-- Show when logged in -->
+                    <!-- Show these when logged in -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/assignments/add">
-                            <i class="bi bi-plus-circle"></i> Add Assignment
+                        <a class="nav-link text-success" href="/assignments/add">
+                            <i class="bi bi-plus-circle"></i> Add New
                         </a>
                     </li>
                     
-                    <!-- User dropdown menu -->
+                    <!-- User menu dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle text-info" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle"></i> <%= user.name %>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                             <li>
                                 <a class="dropdown-item" href="/auth/logout">
                                     <i class="bi bi-box-arrow-right"></i> Logout
@@ -73,17 +71,18 @@ html<!-- views/partials/header.ejs -->
                         </ul>
                     </li>
                 <% } else { %>
-                    <!-- Show when logged out -->
+                    <!-- Show these when logged out -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle text-warning" href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-box-arrow-in-right"></i> Login
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                             <li>
                                 <a class="dropdown-item" href="/auth/google">
                                     <i class="bi bi-google"></i> Login with Google
                                 </a>
                             </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="/auth/github">
                                     <i class="bi bi-github"></i> Login with GitHub
